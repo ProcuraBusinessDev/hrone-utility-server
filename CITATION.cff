@@ -1,20 +1,21 @@
 cff-version: 1.2.0
-message: 'If you use this software, please cite it using the metadata below.'
+message: "If you use this software, please cite it using the metadata below."
 type: software
-title: ADMS Push Server
-abstract: 'Standalone Python ADMS push server — receives attendance from ZKTeco/eSSL biometric terminals in push mode. No Windows, no vendor SDK.'
+title: "ZKTeco ADMS Push Server"
+abstract: "Standalone Python ADMS push server receiving attendance and enrollment events from ZKTeco/eSSL biometric terminals in push mode."
 authors:
   - family-names: Aggarwal
     given-names: Vibhav
-    orcid: 'https://orcid.org/0009-0000-7686-7119'
-    affiliation: 'Independent Researcher, Gurugram, India'
-version: 1.0.0
-date-released: 2026-05-03
-license: MIT
-repository-code: 'https://github.com/Vibhav-Aggarwal/adms-push-server'
+    orcid: "https://orcid.org/0009-0000-7686-7119"
+    affiliation: "Independent Researcher, Gurugram, India"
+version: 1.1.0
+date-released: "2026-05-03"
+license: Apache-2.0
+repository-code: "https://github.com/Vibhav-Aggarwal/zkteco-adms-server"
 keywords:
   - ZKTeco
   - ADMS
   - attendance
   - biometric
   - Python
+  - eSSL

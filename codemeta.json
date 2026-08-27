@@ -1,0 +1,33 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "zkteco-adms-server",
+  "name": "ZKTeco ADMS Push Server",
+  "description": "Standalone Python ADMS push receiver daemon for ZKTeco and eSSL biometric terminals in push mode without Windows or vendor software.",
+  "license": "https://spdx.org/licenses/Apache-2.0",
+  "programmingLanguage": [
+    "Python",
+    "Shell",
+    "Markdown"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Vibhav",
+      "familyName": "Aggarwal",
+      "@id": "https://orcid.org/0009-0000-7686-7119"
+    }
+  ],
+  "codeRepository": "https://github.com/Vibhav-Aggarwal/zkteco-adms-server",
+  "issueTracker": "https://github.com/Vibhav-Aggarwal/zkteco-adms-server/issues",
+  "keywords": [
+    "zkteco",
+    "adms",
+    "essl",
+    "push-sdk",
+    "attendance",
+    "biometric",
+    "fastapi",
+    "linux-server"
+  ]
+}
