@@ -21,7 +21,8 @@ jobs:
           echo "commit_hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   build-and-push:
     name: Build and Push App Docker image
-    needs: commit-hash
+    needs: 
+      - commit-hash
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
