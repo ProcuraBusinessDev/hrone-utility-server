@@ -10,6 +10,7 @@ services:
     container_name: hrone-utility-prod
     image: ghcr.io/procurabusinessdev/hrone-utility:release
     restart: unless-stopped
+    pull_policy: always
     networks:
       - hrone-prod-network
     ports:
