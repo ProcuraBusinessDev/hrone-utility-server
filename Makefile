@@ -1,4 +1,4 @@
-.PHONY: all clean build compose-up compose-down compose-restart 
+.PHONY: all clean build compose-up compose-down compose-restart decrypt
 
 variant ?=local
 
@@ -9,6 +9,13 @@ $(error Invalid variant. Please use one of: $(VALID_VARIANTS))
 endif
 
 commit_hash ?= $(shell git rev-parse HEAD)
+
+
+decrypt:
+	@echo "Decrypting environment..."
+	@echo "variant: $(variant)"
+	@npx shx cp ./envs/.env.$(variant) ./.env
+	@dotenvx decrypt -f ./.env -fk ./.env.keys
 
 compose-up:
 	@echo "Procura Business DevOps Runner v1.0"

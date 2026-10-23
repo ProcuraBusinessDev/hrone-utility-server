@@ -42,8 +42,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/procurabusinessdev/hrone-utility:dev
-            ghcr.io/procurabusinessdev/hrone-utility:dev-${{ github.sha }}
+            ghcr.io/procurabusinessdev/hrone-utility:release
+            ghcr.io/procurabusinessdev/hrone-utility:release-${{ github.sha }}
 
       - name: Logout
         run: docker logout

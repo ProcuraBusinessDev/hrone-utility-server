@@ -8,7 +8,7 @@ networks:
 services:
   utility:
     container_name: hrone-utility-prod
-    image: procuratech/hrone-utility-server:latest
+    image: procuratech/hrone-utility:release
     restart: unless-stopped
     networks:
       - hrone-prod-network
@@ -21,7 +21,7 @@ services:
     networks:
       - hrone-prod-network
     ports:
-      - "5432:5432"
+      - "8432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
