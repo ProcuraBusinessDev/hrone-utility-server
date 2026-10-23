@@ -25,4 +25,4 @@ RUN useradd --create-home --uid 10001 appuser \
 USER appuser
 EXPOSE 8081
 
-CMD ["sh", "-c", "dotenvx run -f ./.env -fk ./.env.keys -- sh -c 'alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port 8081'"]
+CMD ["dotenvx", "run", "-f", "/app/.env", "-fk", "/app/.env.keys", "--", "sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port 8081"]
