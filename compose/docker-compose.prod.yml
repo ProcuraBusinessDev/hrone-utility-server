@@ -8,14 +8,14 @@ networks:
 services:
   utility:
     container_name: hrone-utility-prod
-    image: procuratech/hrone-utility:release
+    image: ghcr.io/procurabusinessdev/hrone-utility:release
     restart: unless-stopped
     networks:
       - hrone-prod-network
     ports:
       - "8081:8081"
     volumes:
-      - ./envs/.env.prod:/app/.env
+      - ./envs/.env.prod:/app/.env 
   postgres:
     container_name: hrone-postgres-prod
     image: postgres:17-alpine
