@@ -1,14 +1,64 @@
-name: repo-standard-lint
-on: [push, pull_request]
+name: Deploy to Production Server
+
+on: 
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
 jobs:
-  lint:
+  commit-hash:
+    name: Get Commit Hash
+    runs-on: ubuntu-latest
+    outputs:
+      commit_hash: ${{ steps.get_commit.outputs.commit_hash }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get commit hash
+        id: get_commit
+        run: |
+          echo "commit_hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  build-and-push:
+    name: Build and Push App Docker image
+    needs: commit-hash
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Required files present
-        run: |
-          for f in README.md LICENSE CITATION.cff CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .repo-meta.yml; do
-            test -f "$f" || { echo "MISSING: $f"; exit 1; }
-          done
-      - name: Validate CITATION.cff
-        run: pipx run cffconvert --validate
+        with:
+          fetch-depth: 0
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image for HROne Attendance Utility
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/procurabusinessdev/hrone-utility:dev
+            ghcr.io/procurabusinessdev/hrone-utility:dev-${{ github.sha }}
+
+      - name: Logout
+        run: docker logout
+  deploy-to-dev:
+    name: Deploy to Production Server
+    needs:
+      - build-and-push
+    runs-on: ["self-hosted", "hrms"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          clean: false
+
+      - name: Deploy or update services
+        run: make compose-up variant="prod" flags="-d"
+
+      - name: Docker Prune
+        run: docker system prune -f
