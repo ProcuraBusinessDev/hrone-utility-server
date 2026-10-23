@@ -1,0 +1,27 @@
+volumes:
+  hrone-postgres-local:
+
+networks:
+  hrone-local-network:
+    external: true
+
+services:
+  postgres:
+    container_name: hrone-postgres-local
+    image: postgres:17-alpine 
+    restart: unless-stopped
+    networks:
+      - hrone-local-network
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - hrone-postgres-local:/var/lib/postgresql/data
