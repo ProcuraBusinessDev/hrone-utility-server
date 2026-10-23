@@ -16,8 +16,8 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./envs/.env.prod:/app/.env 
-      - ./.env.keys:/app/.env.keys
+      - ../envs/.env.prod:/app/.env 
+      - ../.env.keys:/app/.env.keys
   postgres:
     container_name: hrone-postgres-prod
     image: postgres:17-alpine
