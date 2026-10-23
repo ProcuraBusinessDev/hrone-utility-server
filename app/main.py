@@ -129,7 +129,7 @@ def _device_options(sn: str) -> str:
     return (
         f"GET OPTION FROM: {sn}\n"
         f"ATTLOGStamp=None\n"
-        f"OPERLOGStamp=9999\n"
+        f"OPERLOGStamp=None\n"
         f"ATTPHOTOStamp=None\n"
         f"ErrorDelay=30\n"
         f"Delay=10\n"
